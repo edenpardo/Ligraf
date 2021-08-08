@@ -1,0 +1,9 @@
+body{
+  background-color: #EAEAEA !important;
+}
+
+.ui.inverted.top.fixed.menu{
+  background-image: linear-gradient(90deg, rgba(110,110,111,1) 0%, rgba(170,169,169,1) 60%, rgba(189,189,189,1) 87%, rgba(236,236,236,1) 97%)!important;
+  box-shadow: 1px 3px 13px 2px rgba(0,0,0,0.34);
+  direction: rtl;
+}
