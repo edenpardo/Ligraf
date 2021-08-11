@@ -13,13 +13,13 @@ export default function NavBar() {
             style={{ marginRight: "10px", width: "3.5em" }}
           />
         </Menu.Item>
-        <Menu.Item as={NavLink} to='/activities'name="Activities" />
-        <Menu.Item name="לקוחות" />
-        <Menu.Item name="הצעות מחיר פתוחות" />
-        <Menu.Item name="משימות בטיפול" />
-        <Menu.Item name="עבודות לאיסוף" />
-        <Menu.Item name="היסטוריית עבודות" />
-        <Menu.Item name="מלאי" />
+        <Menu.Item as={NavLink} to='/activities' name="Activities" />
+        <Menu.Item as={NavLink} to='/customers' name="לקוחות" />
+        <Menu.Item as={NavLink} to='/priceoffers' name="הצעות מחיר פתוחות" />
+        <Menu.Item as={NavLink} to='/tasks' name="משימות בטיפול" />
+        <Menu.Item as={NavLink} to='/finishedtasks' name="עבודות לאיסוף" />
+        <Menu.Item as={NavLink} to='/taskshistory' name="היסטוריית עבודות" />
+        <Menu.Item as={NavLink} to='/stock' name="מלאי" />
         <Menu.Item>
           <Button
             as={NavLink} to='/createActivity'

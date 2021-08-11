@@ -7,6 +7,12 @@ import HomePage from "../../Features/home/HomePage";
 import ActivityForm from "../../Features/activities/form/ActivityForm";
 import ActivityDashboard from "../../Features/activities/dashboard/ActivityDashboard";
 import ActivityDetails from "../../Features/activities/details/ActivityDetails";
+import CustomersDashboard from "../../Features/customers/dashboard/CustomersDashboard";
+import PriceOffersDashboard from "../../Features/priceOffers/dashboard/PriceOffersDashboard";
+import TasksDashboard from "../../Features/tasks/TasksDashboard";
+import finishedTasksDashboard from "../../Features/finishedTasks/finishedTasksDashboard";
+import TasksHistoryDashboard from "../../Features/tasksHistory/TasksHistoryDashboard";
+import stockDashboard from "../../Features/stock/stockDashboard";
 
 function App() {
   const location = useLocation();
@@ -26,6 +32,12 @@ function App() {
                 path={["/createActivity", "/manage/:id"]}
                 component={ActivityForm}
               />
+              <Route path="/customers" component={CustomersDashboard} />
+              <Route path="/priceoffers" component={PriceOffersDashboard} />
+              <Route path="/tasks" component={TasksDashboard} />
+              <Route path="/finishedtasks" component={finishedTasksDashboard} />
+              <Route path="/taskshistory" component={TasksHistoryDashboard} />
+              <Route path="/stock" component={stockDashboard} />
             </Container>
           </>
         )}

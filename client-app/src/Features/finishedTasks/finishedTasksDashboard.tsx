@@ -1,0 +1,7 @@
+import { observer } from "mobx-react-lite";
+import React from "react";
+export default observer(function finishedTasksDashboard() {
+    return(
+<h2>עבודות לאיסוף</h2>
+    )
+});
