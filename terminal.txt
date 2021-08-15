@@ -3,3 +3,5 @@ npm start
 
 cd API
 dotnet watch run
+
+dotnet ef migrations add Cutomers  -p Persistence -s API

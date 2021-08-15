@@ -9,7 +9,7 @@ export default function HomePage() {
     <Header as='h1' inverted>
       <Image size='massive' src='assets/logo2.png' alt='logo' style={{marginBottom:12, width:150}}/>
     </Header>
-    <Header as='h2' inverted content='ברוכה הבאה'/>
+    <Header as='h2' inverted content='ברוכים הבאים!'/>
     <Button as={Link} to='/activities' size='huge' inverted>
       Take me to the Activities!
     </Button>
