@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import { Activity } from "../models/activity";
+import { Customer } from "../models/customer";
 
 const sleep = (delay: number) => {
   return new Promise((resolve) => {
@@ -34,8 +35,17 @@ const Activities = {
   update:(activity:Activity)=>axios.put<void>(`/activities/${activity.id}`,activity),
   delete: (id:string)=>axios.delete<void>(`/activities/${id}`),
 };
+
+const Customers = {
+  list: () => requests.get<Customer[]>("/customers"),
+  details: (id:string)=> requests.get<Customer>(`/customers/${id}`),
+  create:(customer:Customer)=>axios.post<void>('/customers',customer),
+  update:(customer:Customer)=>axios.put<void>(`/customers/${customer.id}`,customer),
+  delete: (id:string)=>axios.delete<void>(`/customers/${id}`),
+};
 const agent = {
   Activities,
+  Customers,
 };
 
 export default agent;

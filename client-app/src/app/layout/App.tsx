@@ -13,6 +13,7 @@ import TasksDashboard from "../../Features/tasks/TasksDashboard";
 import finishedTasksDashboard from "../../Features/finishedTasks/finishedTasksDashboard";
 import TasksHistoryDashboard from "../../Features/tasksHistory/TasksHistoryDashboard";
 import stockDashboard from "../../Features/stock/stockDashboard";
+import CustomerForm from "../../Features/customers/form/CustomerForm";
 
 function App() {
   const location = useLocation();
@@ -38,6 +39,11 @@ function App() {
               <Route path="/finishedtasks" component={finishedTasksDashboard} />
               <Route path="/taskshistory" component={TasksHistoryDashboard} />
               <Route path="/stock" component={stockDashboard} />
+              <Route
+                key={location.key}
+                path={["/createCustomer", "/editCustomer/:id"]}
+                component={CustomerForm}
+              />
             </Container>
           </>
         )}
