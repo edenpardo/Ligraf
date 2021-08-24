@@ -71,7 +71,7 @@ namespace Persistence.Migrations
                     b.Property<string>("CustomerName")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("CustomerRank")
+                    b.Property<string>("CustomerType")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("HP")

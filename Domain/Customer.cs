@@ -11,7 +11,7 @@ namespace Domain
         public string Address { get; set; }
         public string HP { get; set; }
         public string CustomerName { get; set; }
-        public string CustomerRank { get; set; }
+        public string customerType { get; set; }
         public string BookkeepingName { get; set; }
         public string BookkeepingEmail { get; set; }
         public string BookkeepingPhoneNumber { get; set; }

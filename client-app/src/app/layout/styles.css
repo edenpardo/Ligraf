@@ -1,6 +1,6 @@
 body {
   background-color: #eaeaea !important;
-  direction: rtl;
+ 
 }
 
 .ui.inverted.top.fixed.menu {
@@ -52,4 +52,27 @@ body {
 }
 .ui.input input {
   text-align: right !important;
+}
+
+.MuiTableCell-alignLeft {
+  text-align: right !important;
+}
+.MuiTable-root{
+  direction: rtl;
+}
+.MuiTableFooter-root{
+  direction: ltr;
+}
+.MuiInputBase-input{
+  direction: rtl;
+}
+.ui.form textarea {
+  text-align: right !important;
+}
+.ui form{
+  direction: rtl;
+}
+.ui.form .field>.selection.dropdown{
+  text-align: right !important;
+
 }

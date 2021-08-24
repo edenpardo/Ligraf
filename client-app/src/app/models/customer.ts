@@ -6,7 +6,7 @@ export interface Customer {
     address: string;
     hp: string;
     customerName: string;
-    customerRank: string;
+    customerType: string;
     bookkeepingName: string;
     bookkeepingEmail: string;
     bookkeepingPhoneNumber: string;

@@ -1,10 +1,15 @@
 import { observer } from "mobx-react-lite";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import LoadingComponent from "../../../app/layout/LoadingComponenet";
 import { useStore } from "../../../app/stores/store";
 import { Table, Button, Icon } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import MaterialTable from "material-table";
+import FilterList from "@material-ui/icons/FilterList";
+import { useHistory } from "react-router-dom";
+import InputIcon from "@material-ui/icons/Input";
+import EditIcon from "@material-ui/icons/Edit";
+import PersonAddIcon from "@material-ui/icons/PersonAdd";
 
 const createData = (
   id: string,
@@ -14,7 +19,7 @@ const createData = (
   address: string,
   hp: string,
   customerName: string,
-  customerRank: string,
+  customerType: string,
   bookkeepingName: string,
   bookkeepingEmail: string,
   bookkeepingPhoneNumber: string,
@@ -28,7 +33,7 @@ const createData = (
     address,
     hp,
     customerName,
-    customerRank,
+    customerType,
     bookkeepingName,
     bookkeepingEmail,
     bookkeepingPhoneNumber,
@@ -52,7 +57,7 @@ const headers = [
   { title: "מספר פלאפון", field: "mainPhoneNumber", type: string },
   { title: "כתובת", field: "address", type: string },
   { title: "חפ", field: "hp", type: string },
-  { title: "דירוג לקוח", field: "customerRank", type: string },
+  { title: "סוג לקוח", field: "customerType", type: string },
   // { title: "שם הנהלת חשבונות", field: "bookkeepingName", type: string },
   // { title: "אימייל הנהלת חשבונות", field: "bookkeepingEmail", type: string },
   // { title: "טלפון הנהלת חשבונות", field: "bookkeepingName", type: string },
@@ -60,10 +65,41 @@ const headers = [
 ];
 
 export default observer(function CustomersDashboard() {
+  const [filter, setFilter] = useState(false);
+
   const { customerStore } = useStore();
   const { loadCustomers, customerRegistry } = customerStore;
   const data: any[] = [];
+  const history = useHistory();
 
+  const handleFilter = () => {
+    setFilter(!filter);
+  };
+  const actions = [
+    {
+      icon: () => <FilterList />,
+      tooltip: "Filter",
+      isFreeAction: true,
+      onClick: (event: any) => handleFilter(),
+    },
+    {
+      icon: () => <PersonAddIcon />,
+      tooltip: "הוספת לקוח",
+      isFreeAction: true,
+      onClick: (event: any, data: any) => {
+        history.push(`/createCustomer`);
+      },
+    },
+    {
+      icon: () => <InputIcon style={{ color: "#6666ff" }} />,
+      tooltip: "הצג וערוך לקוח",
+      position: "row",
+      iconProps: { style: { color: "orange" } },
+      onClick: (event: any, data: any) => {
+        history.push(`/editCustomer/${data.id}`);
+      },
+    },
+  ];
   useEffect(() => {
     if (customerRegistry.size <= 1) loadCustomers();
   }, [customerRegistry.size, loadCustomers]);
@@ -78,7 +114,7 @@ export default observer(function CustomersDashboard() {
         customer.address,
         customer.hp,
         customer.customerName,
-        customer.customerRank,
+        customer.customerType,
         customer.bookkeepingName,
         customer.bookkeepingEmail,
         customer.bookkeepingPhoneNumber,
@@ -94,9 +130,27 @@ export default observer(function CustomersDashboard() {
   return (
     <>
       <MaterialTable
-        title="לקוחות" 
+        title=""
         columns={headers}
         data={data}
+        actions={actions as any}
+        options={{
+          exportButton: true,
+          filtering: filter,
+          search: true,
+          //selection: true,
+          sorting: true,
+        }}
+        localization={{
+          toolbar: {
+            searchTooltip: "חיפוש",
+            exportTitle: "יצוא",
+          },
+          header: {
+            actions: "",
+          },
+        }}
+        onSelectionChange={(rows) => console.log(rows)}
       />
     </>
   );

@@ -18,7 +18,7 @@ namespace Persistence.Migrations
                     Address = table.Column<string>(type: "TEXT", nullable: true),
                     HP = table.Column<string>(type: "TEXT", nullable: true),
                     CustomerName = table.Column<string>(type: "TEXT", nullable: true),
-                    CustomerRank = table.Column<string>(type: "TEXT", nullable: true),
+                    CustomerType = table.Column<string>(type: "TEXT", nullable: true),
                     BookkeepingName = table.Column<string>(type: "TEXT", nullable: true),
                     BookkeepingEmail = table.Column<string>(type: "TEXT", nullable: true),
                     BookkeepingPhoneNumber = table.Column<string>(type: "TEXT", nullable: true),

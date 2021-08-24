@@ -64,13 +64,9 @@ namespace Persistence.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Company")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("CustomerName")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("CustomerRank")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("HP")
@@ -83,6 +79,9 @@ namespace Persistence.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("MoreInfo")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("customerType")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
