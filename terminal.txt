@@ -7,3 +7,6 @@ dotnet watch run
 cd..
 dotnet ef migrations add Cutomers  -p Persistence -s API
 dotnet ef database update Cutomers -p Persistence -s API
+
+dotnet ef database drop -s API -p Persistence
+cd API 
