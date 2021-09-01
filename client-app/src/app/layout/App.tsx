@@ -2,7 +2,7 @@ import React from "react";
 import { Container } from "semantic-ui-react";
 import NavBar from "./NavBar";
 import { observer } from "mobx-react-lite";
-import { Route, useLocation } from "react-router-dom";
+import { Route, Switch, useLocation } from "react-router-dom";
 import HomePage from "../../Features/home/HomePage";
 import ActivityForm from "../../Features/activities/form/ActivityForm";
 import ActivityDashboard from "../../Features/activities/dashboard/ActivityDashboard";
@@ -14,11 +14,16 @@ import finishedTasksDashboard from "../../Features/finishedTasks/finishedTasksDa
 import TasksHistoryDashboard from "../../Features/tasksHistory/TasksHistoryDashboard";
 import stockDashboard from "../../Features/stock/stockDashboard";
 import CustomerForm from "../../Features/customers/form/CustomerForm";
+import TestErrors from "../../Features/errors/TestError";
+import { ToastContainer } from "react-toastify";
+import NotFound from "../../Features/errors/NotFound";
+import ServerError from "../../Features/errors/ServerError";
 
 function App() {
   const location = useLocation();
   return (
     <>
+    <ToastContainer position='bottom-right' hideProgressBar/>
       <Route exact path="/" component={HomePage} />
       <Route
         path={"/(.+)"}
@@ -26,24 +31,30 @@ function App() {
           <>
             <NavBar />
             <Container style={{ marginTop: "7em" }}>
-              <Route exact path="/activities" component={ActivityDashboard} />
-              <Route path="/activities/:id" component={ActivityDetails} />
-              <Route
-                key={location.key}
-                path={["/createActivity", "/manage/:id"]}
-                component={ActivityForm}
-              />
-              <Route path="/customers" component={CustomersDashboard} />
-              <Route path="/priceoffers" component={PriceOffersDashboard} />
-              <Route path="/tasks" component={TasksDashboard} />
-              <Route path="/finishedtasks" component={finishedTasksDashboard} />
-              <Route path="/taskshistory" component={TasksHistoryDashboard} />
-              <Route path="/stock" component={stockDashboard} />
-              <Route
-                key={location.key}
-                path={["/createCustomer", "/editCustomer/:id"]}
-                component={CustomerForm}
-              />
+              <Switch>
+                <Route exact path="/activities" component={ActivityDashboard} />
+                <Route path="/activities/:id" component={ActivityDetails} />
+                <Route
+                  key={location.key}
+                  path={["/createActivity", "/manage/:id"]}
+                  component={ActivityForm}
+                />
+                <Route path="/errors" component={TestErrors}/>
+                <Route path="/server-error" component={ServerError}/>
+                <Route path="/customers" component={CustomersDashboard} />
+                <Route path="/priceoffers" component={PriceOffersDashboard} />
+                <Route path="/tasks" component={TasksDashboard} />
+                <Route path="/finishedtasks" component={finishedTasksDashboard} />
+                <Route path="/taskshistory" component={TasksHistoryDashboard} />
+                <Route path="/stock" component={stockDashboard} />
+                <Route
+                  key={location.key}
+                  path={["/createCustomer", "/editCustomer/:id"]}
+                  component={CustomerForm}
+                />
+                <Route component={NotFound}/>
+              </Switch>
+              
             </Container>
           </>
         )}

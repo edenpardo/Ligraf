@@ -14,6 +14,7 @@ export default function NavBar() {
           />
         </Menu.Item>
         <Menu.Item as={NavLink} to='/activities' name="Activities" />
+        <Menu.Item as={NavLink} to='/errors' name="Errors" />
         <Menu.Item as={NavLink} to='/customers' name="לקוחות" />
         <Menu.Item as={NavLink} to='/priceoffers' name="הצעות מחיר פתוחות" />
         <Menu.Item as={NavLink} to='/tasks' name="משימות בטיפול" />

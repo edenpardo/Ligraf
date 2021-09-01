@@ -2,13 +2,10 @@ import { observer } from "mobx-react-lite";
 import React, { useEffect, useState } from "react";
 import LoadingComponent from "../../../app/layout/LoadingComponenet";
 import { useStore } from "../../../app/stores/store";
-import { Table, Button, Icon } from "semantic-ui-react";
-import { Link } from "react-router-dom";
 import MaterialTable from "material-table";
 import FilterList from "@material-ui/icons/FilterList";
 import { useHistory } from "react-router-dom";
 import InputIcon from "@material-ui/icons/Input";
-import EditIcon from "@material-ui/icons/Edit";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 
 const createData = (
