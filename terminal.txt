@@ -10,3 +10,4 @@ dotnet ef database update Cutomers -p Persistence -s API
 
 dotnet ef database drop -s API -p Persistence
 cd API 
+dotnet watch run

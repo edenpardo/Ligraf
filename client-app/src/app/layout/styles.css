@@ -76,3 +76,17 @@ body {
   text-align: right !important;
 
 }
+
+.react-datepicker-wrapper{
+  width:100%;
+}
+
+.StyledInlineErrorMessage{
+  background-color: rgb(255, 245, 245)!important;
+  color: rgb(120, 27, 0)!important;
+  display: block!important;
+
+  padding: 0.5rem 0.75rem!important;
+  margin-top: 0.5rem!important;
+  white-space: pre-line!important;
+}
