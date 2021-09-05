@@ -69,7 +69,7 @@ export default observer(function CustomerForm() {
   if (loadingInitial) return <LoadingComponent content="Loading customer..." />;
 
   return (
-    <Segment clearing>
+    <Segment clearing center className="segmentCSS">
       <Formik
         validationSchema={validationSchema}
         enableReinitialize

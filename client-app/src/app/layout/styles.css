@@ -90,3 +90,9 @@ body {
   margin-top: 0.5rem!important;
   white-space: pre-line!important;
 }
+
+ .segmentCSS{
+  margin-left: auto!important;
+  margin-right: auto!important;
+  width: 700px;
+} 
