@@ -96,3 +96,11 @@ body {
   margin-right: auto!important;
   width: 700px;
 } 
+
+.ui.menu .ui.dropdown .menu> .item{
+  text-align: right !important;
+}
+
+.ui.menu .ui.dropdown .menu>.item .icon{
+  margin: 0 0 0 0.75em!important;
+}
