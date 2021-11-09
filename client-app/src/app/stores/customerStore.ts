@@ -1,17 +1,21 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import agent from "../api/agent";
 import { Customer } from "../models/customer";
+import { CustomerOption } from "../models/customerOption";
 
 export default class CustomerStore {
   customerRegistry = new Map<string, Customer>();
   selectedCustomer: Customer | undefined = undefined;
   editMode = false;
   loading = false;
-  loadingInitial = true;
+  loadingInitial = false;
+  customersOptions = new Array<CustomerOption>();
+  customerOption: CustomerOption | undefined = undefined;
 
   constructor() {
     makeAutoObservable(this);
   }
+
   loadCustomers = async () => {
     this.loadingInitial = true;
     try {
@@ -19,7 +23,6 @@ export default class CustomerStore {
       customers.forEach((customer) => {
         this.setCustomer(customer);
       });
-      //console.log(customers);
       this.setLoadingInitial(false);
     } catch (error) {
       console.log(error);
@@ -27,32 +30,36 @@ export default class CustomerStore {
     }
   };
 
-  loadCustomer= async(id:string)=>{
+  loadCustomer = async (id: string) => {
     let customer = this.getCustomer(id);
-    if (customer){
-      this.selectedCustomer=customer;
+    if (customer) {
+      this.selectedCustomer = customer;
       return customer;
-    }
-    else{
-      this.loadingInitial=true;
-      try{
-        customer=await agent.Customers.details(id);
+    } else {
+      this.loadingInitial = true;
+      try {
+        customer = await agent.Customers.details(id);
         this.setCustomer(customer);
-        runInAction(()=>{
-          this.selectedCustomer=customer;
-        })
+        runInAction(() => {
+          this.selectedCustomer = customer;
+        });
         this.setLoadingInitial(false);
         return customer;
-      }catch (error){
+      } catch (error) {
         console.log(error);
         this.setLoadingInitial(false);
-
       }
     }
-  }
+  };
 
   private setCustomer = (customer: Customer) => {
+    this.customerOption = {
+      value: customer.id,
+      text: customer.customerName,
+    };
+    console.log(`this.customerOption: ${this.customerOption}`);
     this.customerRegistry.set(customer.id, customer);
+    this.customersOptions.push(this.customerOption);
   };
   setLoadingInitial = (state: boolean) => {
     this.loadingInitial = state;

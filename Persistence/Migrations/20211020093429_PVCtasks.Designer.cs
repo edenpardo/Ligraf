@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence;
 
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20211020093429_PVCtasks")]
+    partial class PVCtasks
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -189,10 +191,11 @@ namespace Persistence.Migrations
                     b.Property<int>("Count")
                         .HasColumnType("INTEGER");
 
-                    b.Property<Guid>("CustomerId")
+                    b.Property<Guid?>("CustomerId")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("CustomerName")
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("EndDate")
@@ -224,7 +227,11 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CustomerId");
+
                     b.ToTable("JobTasks");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("JobTask");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -377,7 +384,7 @@ namespace Persistence.Migrations
                     b.Property<double>("WidthSize")
                         .HasColumnType("REAL");
 
-                    b.ToTable("PVCTasks");
+                    b.HasDiscriminator().HasValue("PVCTask");
                 });
 
             modelBuilder.Entity("Domain.ActivityAttendee", b =>
@@ -397,6 +404,15 @@ namespace Persistence.Migrations
                     b.Navigation("Activity");
 
                     b.Navigation("AppUser");
+                });
+
+            modelBuilder.Entity("Domain.JobTask", b =>
+                {
+                    b.HasOne("Domain.Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId");
+
+                    b.Navigation("Customer");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -446,15 +462,6 @@ namespace Persistence.Migrations
                     b.HasOne("Domain.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Domain.PVCTask", b =>
-                {
-                    b.HasOne("Domain.JobTask", null)
-                        .WithOne()
-                        .HasForeignKey("Domain.PVCTask", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

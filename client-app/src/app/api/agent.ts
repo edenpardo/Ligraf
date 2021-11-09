@@ -3,6 +3,8 @@ import { toast } from "react-toastify";
 import { history } from "../..";
 import { Activity } from "../models/activity";
 import { Customer } from "../models/customer";
+import { PVCTask } from "../models/pvcTask";
+import { JobTask } from "../models/jobTask";
 import { User, UserFormValues } from "../models/user";
 import { store } from "../stores/store";
 
@@ -14,11 +16,11 @@ const sleep = (delay: number) => {
 
 axios.defaults.baseURL = "http://localhost:5000/api";
 
-axios.interceptors.request.use(config=>{
-  const token=store.commonStore.token;
-  if(token) config.headers.Authorization=`Bearer ${token}`
+axios.interceptors.request.use((config) => {
+  const token = store.commonStore.token;
+  if (token) config.headers.Authorization = `Bearer ${token}`;
   return config;
-})
+});
 
 axios.interceptors.response.use(
   async (response) => {
@@ -83,6 +85,17 @@ const Customers = {
     axios.put<void>(`/customers/${customer.id}`, customer),
   delete: (id: string) => axios.delete<void>(`/customers/${id}`),
 };
+const JobTasks = {
+  list: () => requests.get<JobTask[]>("/jobTasks"),
+};
+const PVCTasks = {
+  list: () => requests.get<PVCTask[]>("/pvcTasks"),
+  details: (id: string) => requests.get<PVCTask>(`/pvcTasks/${id}`),
+  create: (pvcTask: PVCTask) => axios.post<void>("/pvcTasks", pvcTask),
+  update: (pvcTask: PVCTask) =>
+    axios.put<void>(`/pvcTasks/${pvcTask.id}`, pvcTask),
+  //delete: (id: string) => axios.delete<void>(`/pvcTasks/${id}`),
+};
 
 const Account = {
   current: () => requests.get<User>("/account"),
@@ -94,6 +107,8 @@ const agent = {
   Activities,
   Customers,
   Account,
+  PVCTasks,
+  JobTasks,
 };
 
 export default agent;

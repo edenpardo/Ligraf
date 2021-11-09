@@ -1,7 +1,6 @@
 import { useField } from "formik";
 import React from "react";
 import { Form, Label, Select } from "semantic-ui-react";
-import { isPropertySignature } from "typescript";
 interface Props {
   placeholder: string;
   name: string;
@@ -16,10 +15,10 @@ export default function MySelectInput(props: Props) {
       <label>{props.label}</label>
       <Select
         clearable
-        options={props.options}
-        value={field.value || null}
+        options={props.options|| null}
+        value={field.value || false}
         onChange={(e, d) => helpers.setValue(d.value)}
-        onBlur={()=>helpers.setTouched(true)}
+        onBlur={() => helpers.setTouched(true)}
         placeholder={props.placeholder}
       />
       {meta.touched && meta.error ? (

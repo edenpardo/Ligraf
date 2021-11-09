@@ -55,10 +55,6 @@ const headers = [
   { title: "כתובת", field: "address", type: string },
   { title: "חפ", field: "hp", type: string },
   { title: "סוג לקוח", field: "customerType", type: string },
-  // { title: "שם הנהלת חשבונות", field: "bookkeepingName", type: string },
-  // { title: "אימייל הנהלת חשבונות", field: "bookkeepingEmail", type: string },
-  // { title: "טלפון הנהלת חשבונות", field: "bookkeepingName", type: string },
-  // { title: "מידע נוסף", field: "moreInfo", type: string },
 ];
 
 export default observer(function CustomersDashboard() {

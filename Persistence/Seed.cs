@@ -59,7 +59,40 @@ namespace Persistence
 
             await context.Customers.AddRangeAsync(customers);
             await context.SaveChangesAsync();
+
+            if (context.PVCTasks.Any()) return;
+            var pvcTasks = new List<PVCTask>
+            {
+                new PVCTask
+                {
+                    WidthSize=10,
+                    LengthSize=10,
+                    PrintType="מבריק",
+                    Corners="פינות עגולות",
+                    Image="",
+                    MoreInfo="",
+                    FormatType="שילוט",
+                    TaskType="PVC",
+                    StartDate=DateTime.Now,
+                    EndDate=DateTime.Now.AddMonths(1),
+                    IsShipping=true,
+                    IsPayed=false,
+                    IsGotInvoice=false,
+                    TaskStatus="בטיפול",
+                    Price=10.99,
+                    Count=2,
+                    CustomerId= customers[0].Id,
+                    CustomerName= customers[0].CustomerName
+                }
+            };
+
+            await context.PVCTasks.AddRangeAsync(pvcTasks);
+            await context.SaveChangesAsync();
         }
+
+        // public static async Task SeedTasks(DataContext context){
+            
+        // }
         public static async Task SeedData(DataContext context, UserManager<AppUser> userManager)
         {
             if (!userManager.Users.Any() && !context.Activities.Any())
@@ -309,6 +342,7 @@ namespace Persistence
                 await context.SaveChangesAsync();
             }
             await SeedCustomers(context);
+            //await SeedTasks(context);
         }
     }
 }

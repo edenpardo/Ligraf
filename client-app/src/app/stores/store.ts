@@ -3,6 +3,8 @@ import ActivityStore from "./activityStore";
 import CommonStore from "./commonStore";
 import CustomerStore from "./customerStore";
 import ModalStore from "./modalStore";
+import PVCTaskStore from "./pvcTaskStore";
+import TaskStore from "./taskStore";
 import UserStore from "./userStore";
 
 interface Store {
@@ -11,6 +13,8 @@ interface Store {
   commonStore: CommonStore;
   userStore: UserStore;
   modalStore: ModalStore;
+  taskStore:TaskStore;
+  pvcTaskStore: PVCTaskStore;
 }
 
 export const store: Store = {
@@ -19,6 +23,8 @@ export const store: Store = {
   commonStore: new CommonStore(),
   userStore: new UserStore(),
   modalStore: new ModalStore(),
+  taskStore:new TaskStore(),
+  pvcTaskStore: new PVCTaskStore(),
 };
 
 export const StoreContext = createContext(store);

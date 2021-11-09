@@ -22,24 +22,31 @@ import LoginForm from "../../Features/users/LoginForm";
 import { useStore } from "../stores/store";
 import LoadingComponent from "./LoadingComponenet";
 import ModalContainer from "../common/modals/ModalContainer";
+import PVCForm from "../../Features/tasks/forms/PVCForm";
+import CreateForm from "../../Features/tasks/forms/CreateForm";
+import CreateFormSigns from "../../Features/tasks/forms/CreateFormSigns";
+import CreateFormStickers from "../../Features/tasks/forms/CreateFormStickers";
+import CreateFormPrinting from "../../Features/tasks/forms/CreateFormPrinting";
+import CreateFormWideFormat from "../../Features/tasks/forms/CreateFormWideFormat";
 
 function App() {
   const location = useLocation();
-  const{commonStore,userStore}=useStore();
+  const { commonStore, userStore } = useStore();
 
-  useEffect(()=>{
-    if(commonStore.token){
-      userStore.getUser().finally(()=>commonStore.setAppLoaded());
-    }else{
+  useEffect(() => {
+    if (commonStore.token) {
+      userStore.getUser().finally(() => commonStore.setAppLoaded());
+    } else {
       commonStore.setAppLoaded();
     }
-  },[commonStore,userStore])
+  }, [commonStore, userStore]);
 
-  if(!commonStore.appLoaded) return <LoadingComponent content='Loading app...'/>
+  if (!commonStore.appLoaded)
+    return <LoadingComponent content="Loading app..." />;
   return (
     <>
-    <ToastContainer position='bottom-right' hideProgressBar/>
-    <ModalContainer/>
+      <ToastContainer position="bottom-right" hideProgressBar />
+      <ModalContainer />
       <Route exact path="/" component={HomePage} />
       <Route
         path={"/(.+)"}
@@ -55,14 +62,17 @@ function App() {
                   path={["/createActivity", "/manage/:id"]}
                   component={ActivityForm}
                 />
-                <Route path="/errors" component={TestErrors}/>
-                <Route path="/server-error" component={ServerError}/>
-                <Route path="/login" component={LoginForm}/>
+                <Route path="/errors" component={TestErrors} />
+                <Route path="/server-error" component={ServerError} />
+                <Route path="/login" component={LoginForm} />
 
                 <Route path="/customers" component={CustomersDashboard} />
                 <Route path="/priceoffers" component={PriceOffersDashboard} />
                 <Route path="/tasks" component={TasksDashboard} />
-                <Route path="/finishedtasks" component={finishedTasksDashboard} />
+                <Route
+                  path="/finishedtasks"
+                  component={finishedTasksDashboard}
+                />
                 <Route path="/taskshistory" component={TasksHistoryDashboard} />
                 <Route path="/stock" component={stockDashboard} />
                 <Route
@@ -70,9 +80,27 @@ function App() {
                   path={["/createCustomer", "/editCustomer/:id"]}
                   component={CustomerForm}
                 />
-                <Route component={NotFound}/>
+                <Route
+                  key={location.key}
+                  path={["/createPVCTask", "/editPVCTask/:id"]}
+                  component={PVCForm}
+                />
+                <Route path="/createTask" component={CreateForm} />
+                <Route path="/createTaskSigns" component={CreateFormSigns} />
+                <Route
+                  path="/createTaskStickers"
+                  component={CreateFormStickers}
+                />
+                <Route
+                  path="/createTaskPrinting"
+                  component={CreateFormPrinting}
+                />
+                <Route
+                  path="/createTaskWideFormat"
+                  component={CreateFormWideFormat}
+                />
+                <Route component={NotFound} />
               </Switch>
-              
             </Container>
           </>
         )}

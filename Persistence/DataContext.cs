@@ -23,10 +23,15 @@ namespace Persistence
 
         public DbSet<Activity> Activities  { get; set; }
         public DbSet<Customer> Customers  { get; set; }
+        public DbSet<JobTask> JobTasks  { get; set; }
+        public DbSet<PVCTask> PVCTasks  { get; set; }
         public DbSet<ActivityAttendee> ActivityAttendees { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<JobTask>().ToTable("JobTasks");
+            builder.Entity<PVCTask>().ToTable("PVCTasks");
+
             base.OnModelCreating(builder);
             builder.Entity<ActivityAttendee>(x=>x.HasKey(aa=>new{aa.AppUserId,aa.ActivityId}));
             
